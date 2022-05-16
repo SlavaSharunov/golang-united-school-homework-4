@@ -39,7 +39,9 @@ func StringSum(input string) (output string, err error) {
 			continue
 		} else if string(r) == "+" || string(r) == "-" {
 			if len(elem) > 0 {
-				elements = append(elements, elem)
+				if elem != "+" && elem != "-" {
+					elements = append(elements, elem)
+				}
 				elem = ""
 			}
 		}
@@ -47,7 +49,9 @@ func StringSum(input string) (output string, err error) {
 	}
 
 	if len(elem) > 0 {
-		elements = append(elements, elem)
+		if elem != "+" && elem != "-" {
+			elements = append(elements, elem)
+		}
 	}
 
 	if len(elements) > 2 {
