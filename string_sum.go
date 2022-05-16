@@ -39,7 +39,7 @@ func StringSum(input string) (output string, err error) {
 			continue
 		} else if string(r) == "+" || string(r) == "-" {
 			if len(elem) > 0 {
-				if elem != "+" && elem != "-" {
+				if (elem != "+") && (elem != "-") {
 					elements = append(elements, elem)
 				}
 				elem = ""
@@ -54,7 +54,7 @@ func StringSum(input string) (output string, err error) {
 		}
 	}
 
-	if len(elements) > 2 {
+	if (len(elements) > 2) || (len(elements) <= 1) {
 		return "", fmt.Errorf(errorNotTwoOperands.Error())
 	}
 
