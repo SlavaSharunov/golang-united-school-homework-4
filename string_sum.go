@@ -2,6 +2,9 @@ package string_sum
 
 import (
 	"errors"
+	"fmt"
+	"strconv"
+	"strings"
 )
 
 //use these errors as appropriate, wrapping them with fmt.Errorf function
@@ -23,5 +26,43 @@ var (
 // Use the errors defined above as described, again wrapping into fmt.Errorf
 
 func StringSum(input string) (output string, err error) {
-	return "", nil
+	input = strings.TrimSpace(input)
+	if len(input) <= 0 {
+		return "", fmt.Errorf(errorEmptyInput.Error())
+	}
+
+	elements := []string{}
+
+	elem := ""
+	for _, r := range input {
+		if string(r) == " " {
+			continue
+		} else if string(r) == "+" || string(r) == "-" {
+			if len(elem) > 0 {
+				elements = append(elements, elem)
+				elem = ""
+			}
+		}
+		elem += string(r)
+	}
+
+	if len(elem) > 0 {
+		elements = append(elements, elem)
+	}
+
+	if len(elements) > 2 {
+		return "", fmt.Errorf(errorNotTwoOperands.Error())
+	}
+
+	sum := 0
+	for _, r := range elements {
+		n, err := strconv.Atoi(r)
+		if err != nil {
+			return "", fmt.Errorf("bad token  %w", err)
+		}
+		sum += n
+	}
+
+	res := strconv.Itoa(sum)
+	return res, nil
 }
