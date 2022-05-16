@@ -28,7 +28,7 @@ var (
 func StringSum(input string) (output string, err error) {
 	input = strings.TrimSpace(input)
 	if len(input) <= 0 {
-		return "", fmt.Errorf(errorEmptyInput.Error())
+		return "", fmt.Errorf("Empty input: %w", errorEmptyInput)
 	}
 
 	elements := []string{}
@@ -55,7 +55,7 @@ func StringSum(input string) (output string, err error) {
 	}
 
 	if (len(elements) > 2) || (len(elements) <= 1) {
-		return "", fmt.Errorf(errorNotTwoOperands.Error())
+		return "", fmt.Errorf("Wrong amount of operands: %w", errorNotTwoOperands)
 	}
 
 	sum := 0
